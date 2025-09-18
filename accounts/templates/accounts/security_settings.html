@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-3 mt-4">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow p-3 mb-4 rounded">
+          <div class="card-body">
+            <h2>Security Settings</h2>
+            <hr />
+            {% if messages %}{% for m in messages %}
+              <div class="alert alert-{{ m.tags }}">{{ m }}</div>
+            {% endfor %}{% endif %}
+            <form method="POST">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label>Security question/phrase</label>
+                {{ template_data.form.question }}
+              </div>
+              <div class="mb-3">
+                <label>Answer</label>
+                {{ template_data.form.answer }}
+              </div>
+              <button type="submit" class="btn bg-dark text-white">Save</button>
+            </form>
+            <p class="text-muted mt-3">Tip: choose something only you know. The answer is stored securely (hashed).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
